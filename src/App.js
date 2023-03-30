@@ -42,7 +42,7 @@ async function fetchMovieHandler(){
            <span style={{backgroundColor:"white"}}>{data.title}</span> </li>)
       })}
       {isLoading && <p> Loading...</p>}
-      {isLoading && movies.length===0&& <p> No movies found...</p>}
+      {isLoading && movies.length===0 && <p> No movies found...</p>}
 
       </div>
     </section>
