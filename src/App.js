@@ -11,7 +11,7 @@ async function fetchMovieHandler(){
   setError(null)
   setlLoading(true)
   try{
-           const response=await fetch('https://swapi.dev/api/films');
+           const response=await fetch('https://swapi.dev/api/film');
                if(!response.ok){
                      throw new Error('Something went wrong...');
                   }
@@ -29,9 +29,10 @@ async function fetchMovieHandler(){
         console.group(transformdata)
       }catch(error){
         setError(error.message);
-        setlLoading(false)
 
         }
+        setlLoading(false)
+
       }
 
  return(
@@ -52,9 +53,10 @@ async function fetchMovieHandler(){
           <span  style={{backgroundColor:"white"}}>{data.id}</span>
            <span style={{backgroundColor:"white"}}>{data.title}</span> </li>)
       })}
-      {isLoading && <p> Loading...</p>}
-      {isLoading && movies.length===0 && <p> No movies found...</p>}
       {!isLoading && isError&& <p>{isError}</p>}
+
+      {isLoading && <p> Loading...</p>}
+      {!isLoading && movies.length===0 && !isError&&<p> No movies found...</p>}
 
       </div>
     </section>
