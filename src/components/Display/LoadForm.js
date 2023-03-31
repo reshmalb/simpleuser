@@ -71,24 +71,16 @@ const LoadData=()=>{
 
 
 return(
-    <Card>
- 
+      <Card> 
 
-<section style={{justifyContent:"center",marginLeft:"50%"}}>
- <button style={{backgroundColor:"orange"}} onClick={fetchMovieHandler}>fetchMovies</button>
-{/* {isError && <button onClick={onCancelFetchingHandler}>Cancel fetching</button>} */}
-</section>
-<main>
-<section style={{marginLeft:"30%", marginRight:"30%",  marginTop:"3rem"}}>
- <div style={{backgroundColor:"white"}}>
-<u  style={{backgroundColor:"white"}}> Movies data </u>
+      <button  onClick={fetchMovieHandler}>fetchMovies</button>
 
 
-    { !isLoading && movies.length>0 &&
+        { !isLoading && movies.length>0 &&
     
     movies.map((data)=>{
    return(<li key={data.id} style={{backgroundColor:"white"}}>
-     <span  style={{backgroundColor:"white"}}>{data.title}</span>
+       <span  style={{backgroundColor:"white"}}>{data.title}</span>
       <span style={{backgroundColor:"white"}}>{data.description}</span>
       <span style={{backgroundColor:"white"}}>{data.releaseDate}</span>
 
@@ -99,9 +91,9 @@ return(
  {isLoading && <p> Loading...</p>}
  {!isLoading && movies.length===0 && !isError&&<p> No movies found...</p>}
 
- </div>
- </section>
- </main>
+
+
+
 
 
     </Card>
