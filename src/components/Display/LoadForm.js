@@ -26,6 +26,8 @@ const LoadData=()=>{
          
     
           const data= await response.json();   
+
+          console.log("data=",data)
           //code for swapi 
           // const transformdata=data.results.map((moviedata)=>{
           //   return{
@@ -40,6 +42,7 @@ const LoadData=()=>{
            const loadMovies=[];
            for(const key in data){
             loadMovies.push({
+              id:key,
               title:data[key].movieName,
               description:data[key].description,
               releaseDate:data[key].releaseDate
@@ -64,12 +67,31 @@ const LoadData=()=>{
               
             }
     ,[]);
-    useEffect(()=>{
+    
+    const deleteMovieFromDataBase= useCallback(async function(id){
+      const response= await fetch(
+        
+        `https://apicallsproject-7e177-default-rtdb.firebaseio.com/movies/${id}.json`,
+       { method:'DELETE',
+      
+        headers:{
+          'Content-Type':'application/json'
+          }
+         })
+      const data=await response.json();
+      console.log(data)
+        },[])
+      
+  
+    
+        useEffect(()=>{
      
-        fetchMovieHandler();
-     
-    },[fetchMovieHandler])
-
+          fetchMovieHandler(); 
+          deleteMovieFromDataBase();        
+         
+      },[fetchMovieHandler,deleteMovieFromDataBase])
+  
+   
 
 return(
 
@@ -93,7 +115,9 @@ return(
         </div>
         <div>
         <h4 >{data.releaseDate}</h4>
-
+        <div>
+          <button className={classes.actions} onClick={deleteMovieFromDataBase.bind(null,data.id)}> Delete</button>
+        </div>
         </div>
       
          </li>)
