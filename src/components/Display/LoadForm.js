@@ -1,6 +1,7 @@
 import React ,{ useState,useEffect,useCallback}from "react";
 
 import Card from "../UI/Card";
+import classes from './LoadForm.module.css'
 
 const LoadData=()=>{
     const URL="https://apicallsproject-7e177-default-rtdb.firebaseio.com/movies.json";
@@ -71,32 +72,39 @@ const LoadData=()=>{
 
 
 return(
-      <Card> 
 
-      <button  onClick={fetchMovieHandler}>fetchMovies</button>
-
-
-        { !isLoading && movies.length>0 &&
+<div className={classes.data}>
+    <Card  className={classes.data}> 
+    <div className={classes.actions}>
+    <button onClick={fetchMovieHandler}>fetchMovies</button>
+     </div>
+    </Card>    
+    <Card className={classes.data}>
     
-    movies.map((data)=>{
-   return(<li key={data.id} style={{backgroundColor:"white"}}>
-       <span  style={{backgroundColor:"white"}}>{data.title}</span>
-      <span style={{backgroundColor:"white"}}>{data.description}</span>
-      <span style={{backgroundColor:"white"}}>{data.releaseDate}</span>
+    { !isLoading && movies.length>0 &&
+    
+       movies.map((data)=>{
+      return(<li key={data.id} >
+      <div>
+      <h3>{data.title}</h3>
+        </div>
+       <div>
+       <h4 >{data.description}</h4>
+        </div>
+        <div>
+        <h4 >{data.releaseDate}</h4>
 
-       </li>)
- })}
- {!isLoading && isError&& <p>{isError}</p>}
+        </div>
+      
+         </li>)
+})}
+{!isLoading && isError&& <p>{isError}</p>}
 
- {isLoading && <p> Loading...</p>}
- {!isLoading && movies.length===0 && !isError&&<p> No movies found...</p>}
-
-
-
-
-
-
+{isLoading && <p> Loading...</p>}
+{!isLoading && movies.length===0 && !isError&&<p> No movies found...</p>}
     </Card>
+
+    </div>
 )
 }
 export default LoadData;
